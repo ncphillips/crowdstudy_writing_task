@@ -1,0 +1,22 @@
+var IMAGES = [
+  {name: '01.jpg', id: 0},
+  {name: '02.jpg', id: 1},
+  {name: '03.jpg', id: 2},
+  {name: '04.jpg', id: 3},
+  {name: '05.jpg', id: 4},
+  {name: '06.jpg', id: 5},
+  {name: '07.jpg', id: 6},
+  {name: '08.jpg', id: 7},
+  {name: '09.jpg', id: 8},
+  {name: '10.jpg', id: 9},
+  {name: '11.jpg', id: 10},
+  {name: '12.jpg', id: 11},
+  {name: '13.jpg', id: 12},
+  {name: '14.jpg', id: 13},
+  {name: '15.jpg', id: 14},
+  {name: '16.jpg', id: 15},
+  {name: '17.jpg', id: 16},
+  {name: '18.jpg', id: 17},
+  {name: '19.jpg', id: 18},
+  {name: '20.jpg', id: 19}
+];

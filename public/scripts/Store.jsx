@@ -1,11 +1,35 @@
-var EventEmitter = require('events').EventEmitter;
-var Dispatcher = require('CrowdDispatcher');
+'use strict';
+
+var EventEmitter = null;
+
+if (typeof require !== 'undefined') {
+  EventEmitter = require('events').EventEmitter;
+  var CrowdDispatcher = require('CrowdDispatcher');
+
+} else {
+  EventEmitter = function () {
+    return {
+      _callbacks: [],
+      on: function (event, callback) {
+        this._callbacks.push(callback);
+      },
+      remove: function (callback) {
+
+      },
+      emit: function () {
+        this._callbacks.forEach(function (callback) {
+          callback();
+        });
+      }
+    };
+  };
+}
 
 var Store = function () {
 
   var _this = new EventEmitter();
 
-  _this.dispatcher = Dispatcher;
+  _this.dispatcher = CrowdDispatcher;
 
   _this.emitChange = function () {
     _this.emit('change');
@@ -22,4 +46,6 @@ var Store = function () {
   return _this;
 };
 
-module.exports = Store;
+if (typeof module !== 'undefined') {
+  module.exports = Store;
+}
