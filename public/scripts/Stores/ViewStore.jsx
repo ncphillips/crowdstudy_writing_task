@@ -7,7 +7,7 @@ if (typeof require !== 'undefined') {
 var ViewStore = new Store();
 
 // ImageCache
-ViewStore._view_name = VIEW_NAMES.IMAGE_VIEW;
+ViewStore._view_name = VIEW_NAMES.INSTRUCTIONS;
 
 ViewStore.d_index = ViewStore.dispatcher.register(function (action) {
   switch(action.actionType) {
