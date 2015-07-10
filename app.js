@@ -1,3 +1,4 @@
+/* jslint node: true */
 'use strict';
 
 /**
@@ -13,7 +14,7 @@ var express = require('express');
 var app = express();
 
 // Tells the application to look for views in `./views` before looking in the global views folder..
-app.set('views', __dirname+'/views');
+app.set('views', __dirname + '/views');
 
 // Static files are in ./public and are available at this route.
 // Example:
