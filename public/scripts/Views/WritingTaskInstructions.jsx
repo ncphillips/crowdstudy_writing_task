@@ -5,6 +5,7 @@ var WritingTaskInstructions = React.createClass({
       <div>
         <div className="col-sm-3"></div>
         <div className="col-sm-6">
+          <br/>
           <SubmitStoriesButton className="btn-block" callback={this.props.exit}/><br/>
           <h1>Writing Task</h1>
           <div>
