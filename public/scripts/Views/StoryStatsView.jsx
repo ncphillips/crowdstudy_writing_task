@@ -54,12 +54,12 @@ var StoryStatsView = React.createClass({
     var text = ImageStore.hasNext() ? "Next Image" : "Finish Task";
     return (
       <div>
-        <div className="col-sm-3"></div>
-        <div className="col-sm-6">
+        <div className="col-md-3"></div>
+        <div className="col-md-6">
           <StoryStats />
           <input type="button" className="btn btn-primary center-block" onClick={this._onClick} value={text}/>
         </div>
-        <div className="col-sm-3"></div>
+        <div className="col-md-3"></div>
       </div>
     );
   },

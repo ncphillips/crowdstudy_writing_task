@@ -48,8 +48,8 @@ var ImageView = React.createClass({
     var url = 'images/' + this.state.image.name;
     return (
       <div>
-        <div className="col-sm-3"></div>
-        <div className="col-sm-6">
+        <div className="col-md-3"></div>
+        <div className="col-md-6">
           <div className="row">
             <br/>
             <SubmitStoriesButton callback={this.props.exit} className="btn-block"/>
@@ -59,7 +59,7 @@ var ImageView = React.createClass({
             <StoryEdit image={this.state.image} saveCallback={this.viewStats}/>
           </div>
         </div>
-        <div className="col-sm-3"> </div>
+        <div className="col-md-3"> </div>
       </div>
     );
   },

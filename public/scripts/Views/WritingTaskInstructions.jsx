@@ -3,8 +3,8 @@ var WritingTaskInstructions = React.createClass({
     "use strict";
     return (
       <div>
-        <div className="col-sm-3"></div>
-        <div className="col-sm-6">
+        <div className="col-md-3"></div>
+        <div className="col-md-6">
           <br/>
           <SubmitStoriesButton className="btn-block" callback={this.props.exit}/><br/>
           <h1>Writing Task</h1>
@@ -13,7 +13,7 @@ var WritingTaskInstructions = React.createClass({
               Welcome to the UPEI HCI Lab Writing Task!
             </p>
             <p>
-              Over the course of this task, you will be shown 20 images. For each image
+              Over the course of this task, you will be shown 21 images. For each image
               we ask that you write a short story about that image. Each story should be
               between 1 and 5 lines long.
             </p>
@@ -31,7 +31,7 @@ var WritingTaskInstructions = React.createClass({
           </div>
           <input type="button" value="Begin" className="btn btn-block btn-primary" onClick={this._onClick}/>
         </div>
-        <div className="col-sm-3"></div>
+        <div className="col-md-3"></div>
       </div>
     );
   },

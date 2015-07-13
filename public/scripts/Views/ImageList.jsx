@@ -24,10 +24,10 @@ var ImageSummary = React.createClass({
     return (
       <div className="panel panel-default" onClick={this._onClick}>
         <div className="panel-body">
-          <div className="col-sm-4">
+          <div className="col-md-4">
             <Thumbnail {...this.props}/>
           </div>
-          <div className="col-sm-8">
+          <div className="col-md-8">
             <p><b>Status: </b><span className={css}>{text}</span></p>
             <p>{story}</p>
           </div>
@@ -54,14 +54,14 @@ var ImageList = React.createClass({
 
     return (
       <div>
-        <div className="col-sm-3"></div>
-        <div className="col-sm-6">
+        <div className="col-md-3"></div>
+        <div className="col-md-6">
           <h1>Images</h1>
           <SubmitStoriesButton className="btn-block" callback={this.props.exit}/><br/>
           {image_thumbnails}
           <SubmitStoriesButton className="btn-block" callback={this.props.exit}/>
         </div>
-        <div className="col-sm-3"></div>
+        <div className="col-md-3"></div>
       </div>
     );
   },
