@@ -18,7 +18,7 @@ var StoryStats = React.createClass({
             <tr>
               <td>You</td>
               <td>{this.state.stats.story_length}</td>
-              <td>{this.state.stats.time_spent}</td>
+              <td>{Math.round(this.state.stats.time_spent/100)/10} sec.</td>
               <td>{this.state.stats.key_presses}</td>
             </tr>
           </tbody>
