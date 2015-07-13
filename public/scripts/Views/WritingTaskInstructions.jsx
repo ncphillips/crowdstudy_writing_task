@@ -5,9 +5,8 @@ var WritingTaskInstructions = React.createClass({
       <div>
         <div className="col-sm-3"></div>
         <div className="col-sm-6">
-          <br/>
           <SubmitStoriesButton className="btn-block" callback={this.props.exit}/><br/>
-          <h1 className="text-center">Instructions</h1>
+          <h1>Writing Task: Instructions</h1>
           <div>
             <p>
               Welcome to the UPEI HCI Lab Writing Task!
@@ -29,7 +28,7 @@ var WritingTaskInstructions = React.createClass({
               Thank you for taking part in this task. Press the button below to start!
             </p>
           </div>
-          <input defaultValue="Begin!" type="button" className="btn btn-block btn-primary" onClick={this._onClick}/>
+          <input type="button" className="btn btn-primary" onClick={this._onClick}/>
         </div>
         <div className="col-sm-3"></div>
       </div>
