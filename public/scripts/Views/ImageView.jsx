@@ -46,17 +46,23 @@ var ImageListNav = React.createClass({
 var ImageView = React.createClass({
   render: function () {
     var url = 'images/' + this.state.image.name;
+    var style = {width: (100*(this.state.image.id / IMAGES.length)) + '%'};
     return (
       <div>
         <div className="col-md-3"></div>
         <div className="col-md-6">
           <div className="row">
             <br/>
-            <SubmitStoriesButton callback={this.props.exit} className="btn-block"/>
+            <div className="text-center">
+              <p>You have completed {this.state.image.id} out of {IMAGES.length} stories!</p>
+            </div>
+            <div className="progress">
+              <div className="progress-bar" role="progressbar" style={style}> </div>
+            </div>
             <h1>Image: {this.state.image.id + 1}</h1>
             <img className="center-block" height={this.state.imageHeight} src={url} />
             <br/>
-            <StoryEdit image={this.state.image} saveCallback={this.viewStats}/>
+            <StoryEdit image={this.state.image} saveCallback={this._saveCallback}/>
           </div>
         </div>
         <div className="col-md-3"> </div>
@@ -74,6 +80,7 @@ var ImageView = React.createClass({
     ImageStore.addChangeListener(this._setImage);
   },
   componentWillUnmount: function () {
+    window.onresize = null;
     ImageStore.removeChangeListener(this._setImage);
   },
   resetImageHeight: function () {
@@ -84,6 +91,16 @@ var ImageView = React.createClass({
   },
   _setImage: function () {
     this.setState({image: ImageStore.getCurrent()});
+  },
+  _saveCallback: function () {
+    if ((this.state.image.id + 1) % CONFIG.block_size === 0){
+      ViewActions.setView(VIEW_NAMES.STORY_STATS);
+    } else if (ImageStore.hasNext()) {
+      ImageActions.next();
+    } else {
+      this.props.exit();
+    }
+
   },
   viewStats: function () {
     ViewActions.setView(VIEW_NAMES.STORY_STATS);

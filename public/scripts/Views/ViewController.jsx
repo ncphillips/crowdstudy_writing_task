@@ -16,4 +16,4 @@ var ViewController = React.createClass({
   }
 });
 
-React.render(<CrowdExperiment experiment_name="writing" experiment_app={ViewController}/>, document.getElementById('app'));
+React.render(<CrowdExperiment experiment_name="writing_task" experiment_app={ViewController}/>, document.getElementById('app'));

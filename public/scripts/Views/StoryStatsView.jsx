@@ -1,26 +1,65 @@
 'use strict';
 
-var StoryStats = React.createClass({
+var LABELS = {
+  rows: {
+    workers_last: "Your Last 3 Stories",
+    workers_average: "Your Average Story",
+    population_average: "Average Worker's Story",
+    population_elite: "Expert Worker's Story"
+  },
+  cols: {
+    time: 'Time/Story',
+    time_per_story: 'Time/Story',
+    words: 'Average Story Length'
+  }
+};
+
+var StoryStatsRow = React.createClass({
   render: function () {
     return (
+      <tr>
+        <td>{this.props.label}</td>
+        <td className="active">{Math.round(this.props.data.time/100)/10} sec.</td>
+        <td className="active">{Math.round(this.props.data.words * 100)/100} words</td>
+      </tr>
+    );
+  }
+});
+
+var StoryStats = React.createClass({
+  render: function () {
+    var cid = ImageStore.getCurrent().id;
+    var style = {width: (100 * (cid/IMAGES.length)) + '%'};
+
+    var rows = Object.getOwnPropertyNames(this.state.stats).map(function (stat_name) {
+      var data = this.state.stats[stat_name];
+      var label = LABELS.rows[stat_name];
+      if (data.time && data.words) {
+        return <StoryStatsRow label={label} data={data}/>
+      }
+      return null;
+    }.bind(this));
+    return (
       <div>
-        <h2>Stats</h2>
+        <br/>
+        <div className="text-center">
+          <p>You have completed {cid} out of {IMAGES.length} stories!</p>
+        </div>
+        <div className="progress">
+          <div className="progress-bar" role="progressbar" style={style}> </div>
+        </div>
+        <h2 className="text-center">Writing Task</h2>
+        <h3>Feedback</h3>
         <table className="table">
           <thead>
             <tr>
               <td></td>
-              <td>Length</td>
-              <td>Time</td>
-              <td>Key-Presses</td>
+              <td>{LABELS.cols.time}</td>
+              <td>{LABELS.cols.words}</td>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>You</td>
-              <td>{this.state.stats.story_length}</td>
-              <td>{Math.round(this.state.stats.time_spent/100)/10} sec.</td>
-              <td>{this.state.stats.key_presses}</td>
-            </tr>
+          {rows}
           </tbody>
         </table>
       </div>
@@ -28,8 +67,9 @@ var StoryStats = React.createClass({
   },
   getInitialState: function () {
     var image = ImageStore.getCurrent();
+    var blockNum = ((image.id  + 1)/ CONFIG.block_size) - 1;
     return {
-      stats: StoryStatsStore.get(image.id),
+      stats: StoryStatsStore.generateBlockStats(blockNum),
       image: image
     };
   },
@@ -41,7 +81,8 @@ var StoryStats = React.createClass({
     StoryStatsStore.removeChangeListener(this.setStats);
   },
   setStats: function () {
-    this.setState({stats: StoryStatsStore.get(this.state.image.id)});
+    var blockNum = ((this.state.image.id  + 1)/ CONFIG.block_size) - 1;
+    this.setState({stats: StoryStatsStore.generateBlockStats(blockNum)});
   },
   setImage: function () {
     this.setState({image: ImageStore.getCurrent()}, this.setStats);
@@ -57,7 +98,7 @@ var StoryStatsView = React.createClass({
         <div className="col-md-3"></div>
         <div className="col-md-6">
           <StoryStats />
-          <input type="button" className="btn btn-primary center-block" onClick={this._onClick} value={text}/>
+          <Questions callback={this._onClick}/>
         </div>
         <div className="col-md-3"></div>
       </div>

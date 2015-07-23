@@ -13,10 +13,10 @@ var IMAGES = [
   {name: '12.jpg', id: 11},
   {name: '13.jpg', id: 12},
   {name: '14.jpg', id: 13},
-  {name: '15.jpg', id: 14},
-  {name: '16.jpg', id: 15},
-  {name: '17.jpg', id: 16},
-  {name: '18.jpg', id: 17},
-  {name: '19.jpg', id: 18},
-  {name: '20.jpg', id: 19}
+  {name: '15.jpg', id: 14}
+  //{name: '16.jpg', id: 15},
+  //{name: '17.jpg', id: 16},
+  //{name: '18.jpg', id: 17},
+  //{name: '19.jpg', id: 18},
+  //{name: '20.jpg', id: 19}
 ];

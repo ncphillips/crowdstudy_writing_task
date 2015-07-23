@@ -69,6 +69,7 @@ var StoryEdit = React.createClass({
 
     this.setState({story: text}, this.componentWillReceiveProps);
     StoryActions.update(iid, text, edit);
+    console.log("saving");
     this.props.saveCallback();
   }
 });
