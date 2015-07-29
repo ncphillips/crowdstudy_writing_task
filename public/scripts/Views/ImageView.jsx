@@ -62,6 +62,11 @@ var ImageView = React.createClass({
             <h1>Image: {this.state.image.id + 1}</h1>
             <img className="center-block" height={this.state.imageHeight} src={url} />
             <br/>
+            <ul>
+              <li>Stories must be at least one line long, but longer is better</li>
+              <li>Make sure to write your stories as <em>quickly</em> as you can</li>
+              <li>And above all, write a <em>creative</em> and <em>fun</em> little story!</li>
+            </ul>
             <StoryEdit image={this.state.image} saveCallback={this._saveCallback}/>
           </div>
         </div>

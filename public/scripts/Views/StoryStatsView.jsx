@@ -34,7 +34,7 @@ var StoryStats = React.createClass({
     var rows = Object.getOwnPropertyNames(this.state.stats).map(function (stat_name) {
       var data = this.state.stats[stat_name];
       var label = LABELS.rows[stat_name];
-      if (data.time && data.words) {
+      if (data && data.time && data.words) {
         return <StoryStatsRow label={label} data={data}/>
       }
       return null;

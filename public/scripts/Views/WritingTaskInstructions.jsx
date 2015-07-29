@@ -20,17 +20,28 @@ var WritingTaskInstructions = React.createClass({
               Welcome to the UPEI HCI Lab Writing Task!
             </p>
             <p>
-              Over the course of this task, you will be shown {IMAGES.length} images. For each image
-              we ask that you write a short story about that image. Each story should be
-              between 1 and 5 lines long.
+              Over the course of this task; you will be shown {IMAGES.length} images.
+            </p>
+            <p>
+              For each image we ask that you write a short, creative story about that image.
+              Each story should be at least one line long, and the longer the better.
+              Your goal is to be as creative, witty, and funny as possible...but also be fast.
             </p>
             <p>
               After every {CONFIG.block_size} image, you will be given some feedback and you will be asked to
               answer a couple questions about that feedback.
             </p>
             <p>
-              To finish of the task, we'll have you fill out a short questionaire about
+              To finish of the task, we'll have you fill out a short questionnaire about
               your experience doing this task.
+            </p>
+            <p>
+              In summary:
+              <ul>
+                <li>Stories must be at least one line long, and longer is better.</li>
+                <li>Try to write your stories as quickly as you can!</li>
+                <li>Write</li>
+              </ul>
             </p>
             <p>
               Thank you for taking part in this task. Press the button below to start!

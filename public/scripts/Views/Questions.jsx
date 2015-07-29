@@ -15,7 +15,7 @@ var _questions = {
   first_feedback_questions: [
     "Do you feel like you wrote your last " + CONFIG.block_size + " stories quickly?",
     "Do you feel like your last " + CONFIG.block_size + " stories were creative?",
-    "Do you feel like your last " + CONFIG.block_size + " stories were long?",
+    "Do you feel like your last " + CONFIG.block_size + " stories were long enough?",
 
     "Were your last " + CONFIG.block_size + " stories longer than the average worker's stories?",
     "Were your last " + CONFIG.block_size + " stories longer than the top worker's stories?",
@@ -26,7 +26,8 @@ var _questions = {
   other_feedback_questions: [
     "Do you feel like you wrote your last " + CONFIG.block_size + " stories quickly?",
     "Do you feel like your last " + CONFIG.block_size + " stories were creative?",
-    "Do you feel like your last " + CONFIG.block_size + " stories were long?",
+    "Do you feel like your last " + CONFIG.block_size + " stories were long enough?",
+    "Do you feel like you performed well in writing the last " + CONFIG.block_size + " stories?",
 
     "Were your last " + CONFIG.block_size + " stories longer than the average worker's stories?",
     "Were your last " + CONFIG.block_size + " stories longer than the top worker's stories?",
@@ -77,7 +78,7 @@ var Questions = React.createClass({
 
     return (
       <div>
-        <p>Please look at your feedback table above carefully, and answer the questions below to complete this round.</p>
+        <h4>Please look at your feedback table above carefully, and answer the questions below to complete this round.</h4>
         {questions}
         <input type="button" className="btn btn-block btn-default" value={buttonText} disabled={buttonDisabled} onClick={this.saveAnswer}/>
         {errorMessage}
