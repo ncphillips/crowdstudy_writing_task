@@ -49,7 +49,7 @@ var StoryStats = React.createClass({
           <div className="progress-bar" role="progressbar" style={style}> </div>
         </div>
         <h2 className="text-center">Writing Task</h2>
-        <h3>Feedback</h3>
+        <h3>Feedback Table</h3>
         <table className="table">
           <thead>
             <tr>
@@ -104,9 +104,19 @@ var StoryStatsView = React.createClass({
       </div>
     );
   },
-  _onClick: function () {
+  _onClick: function (q) {
     if (ImageStore.hasNext()) {
       ImageActions.next();
+      var image = ImageStore.getCurrent();
+      var blockNum = (image.id/ CONFIG.block_size) - 1;
+      var worker = WorkerStore.get();
+      var experiment = ExperimentStore.get();
+      experiment.stats_questions = experiment.stats_questions || [];
+      experiment.stats_questions.push({
+        questions: q,
+        stats: StoryStatsStore.generateBlockStats(blockNum)
+      });
+      ExperimentActions.update(worker._id, 'writing_task', experiment);
       ViewActions.setView(VIEW_NAMES.IMAGE_VIEW);
     } else {
       this.props.exit();
