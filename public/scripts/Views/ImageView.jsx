@@ -92,7 +92,7 @@ var ImageView = React.createClass({
     this.setState({imageHeight: this.imageHeight()});
   },
   imageHeight: function () {
-    return window.innerHeight - 300
+    return window.innerHeight - 350;
   },
   _setImage: function () {
     this.setState({image: ImageStore.getCurrent()});
