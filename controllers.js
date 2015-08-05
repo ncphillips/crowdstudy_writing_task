@@ -42,6 +42,16 @@ var real_stats = function (req, res, next) {
     if (err) {
       return next(err);
     } else if (workers.length < 1) {
+      req.stats = {
+        population_average: {
+          time: 0,
+          words: 0
+        },
+        population_elite: {
+          time: 0,
+          words: 0
+        }
+      };
       return next();
     }
     console.log(workers);
