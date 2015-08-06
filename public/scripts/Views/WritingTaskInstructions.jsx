@@ -28,8 +28,8 @@ var WritingTaskInstructions = React.createClass({
               Your goal is to be as creative, witty, and funny as possible...but also be fast.
             </p>
             <p>
-              After every {CONFIG.block_size} image, you will be given some feedback and you will be asked to
-              answer a couple questions about that feedback.
+              After every {CONFIG.block_size} images, you will be given some feedback and you will be asked to
+              answer a few questions about that feedback.
             </p>
             <p>
               To finish of the task, we'll have you fill out a short questionnaire about
@@ -38,9 +38,9 @@ var WritingTaskInstructions = React.createClass({
             <p>
               In summary:
               <ul>
-                <li>Stories must be at least one line long, and longer is better.</li>
-                <li>Try to write your stories as quickly as you can!</li>
-                <li>Write</li>
+                <li>Stories must be at least one line long, but longer is better</li>
+                <li>Make sure to write your stories as <em>quickly</em> as you can</li>
+                <li>And above all, write a <em>creative</em> and <em>fun</em> little story!</li>
               </ul>
             </p>
             <p>
