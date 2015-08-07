@@ -49,8 +49,10 @@ var StoryStats = React.createClass({
           <div className="progress-bar" role="progressbar" style={style}> </div>
         </div>
         <h2 className="text-center">Writing Task</h2>
-        <h3>Feedback Table</h3>
         <table className="table">
+          <caption>
+            <h3>Feedback Table</h3>
+          </caption>
           <thead>
             <tr>
               <td></td>

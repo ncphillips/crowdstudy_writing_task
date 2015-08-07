@@ -13,30 +13,20 @@ var props = {
 };
 var _questions = {
   first_feedback_questions: [
-    "Do you feel like you wrote your last " + CONFIG.block_size + " stories quickly?",
-    "Do you feel like your last " + CONFIG.block_size + " stories were creative?",
-    "Do you feel like your last " + CONFIG.block_size + " stories were long enough?",
+    "Did you write your last " + CONFIG.block_size + " stories quickly?",
+    "Were your last " + CONFIG.block_size + " stories a good length?",
+    "Were your last " + CONFIG.block_size + " stories creative?",
+    "Do you feel like you performed well when writing your last "+ CONFIG.block_size + " stories?"
 
-    "Were your last " + CONFIG.block_size + " stories longer than the average worker's stories?",
-    "Were your last " + CONFIG.block_size + " stories longer than the top worker's stories?",
-
-    "Were your last " + CONFIG.block_size + " stories written faster than the average worker's stories?",
-    "Were your last " + CONFIG.block_size + " stories written faster than the top worker's stories?"
   ],
   other_feedback_questions: [
-    "Do you feel like you wrote your last " + CONFIG.block_size + " stories quickly?",
-    "Do you feel like your last " + CONFIG.block_size + " stories were creative?",
-    "Do you feel like your last " + CONFIG.block_size + " stories were long enough?",
-    "Do you feel like you performed well in writing the last " + CONFIG.block_size + " stories?",
-
-    "Were your last " + CONFIG.block_size + " stories longer than the average worker's stories?",
-    "Were your last " + CONFIG.block_size + " stories longer than the top worker's stories?",
-
-    "Were your last " + CONFIG.block_size + " stories written faster than the average worker's stories?",
-    "Were your last " + CONFIG.block_size + " stories written faster than the top worker's stories?",
-
-    "Did you write your last " + CONFIG.block_size + " stories written quicker than your previous stories?",
-    "Were your last " + CONFIG.block_size + " stories more creative than your previous stories?"
+    "Did you write your last " + CONFIG.block_size + " stories faster than the Average worker?",
+    "Did you write your last " + CONFIG.block_size + " stories faster than the Expert worker?",
+    "Were your last " + CONFIG.block_size + " stories longer than the Average worker's?",
+    "Were your last " + CONFIG.block_size + " stories longer than the Expert worker's?",
+    "Although you haven't evaluated your stories yet, do you think that your last " + CONFIG.block_size + " stories were more creative than the Average worker's?",
+    "Although you haven't evaluated your stories yet, do you think that your last " + CONFIG.block_size + " stories were more creative than the Expert worker's?",
+    "Do you feel like you performed well when writing your last "+ CONFIG.block_size + " stories?"
   ]
 };
 
@@ -79,6 +69,7 @@ var Questions = React.createClass({
     return (
       <div>
         <h4>Please look at your feedback table above carefully, and answer the questions below to complete this round.</h4>
+        <h5>Remeber we will be evaluating the accuracy of your answers before rewarding your bonus, so please answer accurately and honestly.</h5>
         {questions}
         <input type="button" className="btn btn-block btn-default" value={buttonText} disabled={buttonDisabled} onClick={this.saveAnswer}/>
         {errorMessage}
