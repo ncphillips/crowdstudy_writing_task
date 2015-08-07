@@ -27,10 +27,7 @@ var WritingTaskInstructions = React.createClass({
               Each story should be at least one line long, and the longer the better.
               Your goal is to be as creative, witty, and funny as possible...but also be fast.
             </p>
-            <p>
-              After every {CONFIG.block_size} images, you will be given some feedback and you will be asked to
-              answer a few questions about that feedback.
-            </p>
+            <p>Periodically you will receive feedback and be asked some questions. Please answer these accurately and truthfully as you can. Your answers will be verified before your bonus is awarded.</p>
             <p>
               To finish of the task, we'll have you fill out a short questionnaire about
               your experience doing this task.
