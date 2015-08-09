@@ -94,13 +94,14 @@ var StoryStats = React.createClass({
 
 var StoryStatsView = React.createClass({
   render: function () {
-    var text = ImageStore.hasNext() ? "Next Image" : "Finish Task";
+    var image = ImageStore.getCurrent();
+    var blockNum = ((image.id  + 1)/ CONFIG.block_size) - 1;
     return (
       <div>
         <div className="col-md-3"></div>
         <div className="col-md-6">
           <StoryStats />
-          <Questions callback={this._onClick}/>
+          <Questions callback={this._onClick} is_first_feedback={blockNum === 0}/>
         </div>
         <div className="col-md-3"></div>
       </div>
