@@ -59,7 +59,7 @@ StoryStatsStore.generateBlockStats = function (block_num) {
 
  return {
     workers_last: stats.aggregateStats(workers_last_stats),
-    workers_average: stats.aggregateStats(workers_average_stats),
+    //workers_average: stats.aggregateStats(workers_average_stats),
     population_average: this._population_stats.population_average,
     population_elite: this._population_stats.population_elite
   };
