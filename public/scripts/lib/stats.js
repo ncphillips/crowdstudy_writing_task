@@ -130,24 +130,35 @@ var writingstats = (function () {
     return stats.aggregateStats(block_stats);
   }
 
-  function generatePopulationEliteStats(workers) {
+  function generatePopulationEliteStats(workers, block_num, block_size) {
     // Get the aggregated stats object for  a worker.
     var n = Math.ceil(workers.length * 0.15) || 1;
     var worker_average_stats = workers.map(function (worker) {
-      return generateAverageBlockStats(worker.experiments.writing_task.data);
+      var blocks = [];
+      var iid;
+      for (var i=0; i< block_size; i++) {
+        iid = (block_num * block_size) + i;
+        blocks.push(writingstats.generateBlockStats(worker.experiments.writing_task.data[iid]));
+      }
+      return stats.aggregateStats(blocks);
     });
     var elite_workers = stats.sortStats(worker_average_stats, 'rank');
     var elite_worker_stats = elite_workers.splice(0, n);
     return stats.aggregateStats(elite_worker_stats);
   }
 
-  function generatePopulationAverageStats(workers) {
+  function generatePopulationAverageStats(workers, block_num, block_size) {
     var worker_average_stats = workers.map(function (worker) {
-      return generateAverageBlockStats(worker.experiments.writing_task.data);
+      var blocks = [];
+      var iid;
+      for (var i=0; i< block_size; i++) {
+        iid = (block_num * block_size) + i;
+        blocks.push(writingstats.generateBlockStats(worker.experiments.writing_task.data[iid]));
+      }
+      return stats.aggregateStats(blocks);
     });
 
     return stats.aggregateStats(worker_average_stats);
-
   }
 
   return {

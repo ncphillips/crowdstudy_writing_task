@@ -2,7 +2,7 @@
 
 var LABELS = {
   rows: {
-    workers_last: "Your Last 3 Stories",
+    worker_last: "Your Last 3 Stories",
     workers_average: "Your Average Story",
     population_average: "Average Worker's Story",
     population_elite: "Expert Worker's Story"
@@ -34,11 +34,18 @@ var StoryStats = React.createClass({
     var rows = Object.getOwnPropertyNames(this.state.stats).map(function (stat_name) {
       var data = this.state.stats[stat_name];
       var label = LABELS.rows[stat_name];
-      if (data && data.time && data.words) {
+      if (this.props.is_first_feedback && (stat_name === 'population_average' || stat_name === 'population_elite')) {
+          return null;
+      }
+      else if (data && data.time && data.words) {
         return <StoryStatsRow label={label} data={data}/>
       }
       return null;
     }.bind(this));
+
+    if (rows.length == 0) {
+      rows.push(<tr><td>Loading...</td></tr>)
+    }
     return (
       <div>
         <br/>
@@ -68,23 +75,25 @@ var StoryStats = React.createClass({
     );
   },
   getInitialState: function () {
-    var image = ImageStore.getCurrent();
-    var blockNum = ((image.id  + 1)/ CONFIG.block_size) - 1;
     return {
-      stats: StoryStatsStore.generateBlockStats(blockNum),
-      image: image
+      stats: {},
+      image: ImageStore.getCurrent()
     };
   },
   componentDidMount: function () {
     StoryStatsStore.addChangeListener(this.setStats);
-    ImageStore.addChangeListener(this.setImage)
+    ImageStore.addChangeListener(this.setImage);
+    var image = ImageStore.getCurrent();
+    var wid = WorkerStore.get()._id;
+    var block_num = ((image.id  + 1)/ CONFIG.block_size) - 1;
+    StoryStatsActions.load_block_stats(wid, block_num)
   },
   componentWillUnmount: function () {
+    ImageStore.removeChangeListener(this.setImage);
     StoryStatsStore.removeChangeListener(this.setStats);
   },
   setStats: function () {
-    var blockNum = ((this.state.image.id  + 1)/ CONFIG.block_size) - 1;
-    this.setState({stats: StoryStatsStore.generateBlockStats(blockNum)});
+    this.setState({stats: StoryStatsStore.get()});
   },
   setImage: function () {
     this.setState({image: ImageStore.getCurrent()}, this.setStats);
@@ -100,26 +109,24 @@ var StoryStatsView = React.createClass({
       <div>
         <div className="col-md-3"></div>
         <div className="col-md-6">
-          <StoryStats />
-          <Questions callback={this._onClick} is_first_feedback={blockNum === 0}/>
+          <StoryStats is_first_feedback={blockNum < 2}/>
+          <Questions callback={this._onClick} is_first_feedback={blockNum < 2}/>
         </div>
         <div className="col-md-3"></div>
       </div>
     );
   },
   _onClick: function (q) {
+    var worker = WorkerStore.get();
+    var experiment = ExperimentStore.get();
+    experiment.stats_questions = experiment.stats_questions || [];
+    experiment.stats_questions.push({
+      questions: q,
+      stats: StoryStatsStore.get()
+    });
+    ExperimentActions.update(worker._id, 'writing_task', experiment);
     if (ImageStore.hasNext()) {
       ImageActions.next();
-      var image = ImageStore.getCurrent();
-      var blockNum = (image.id/ CONFIG.block_size) - 1;
-      var worker = WorkerStore.get();
-      var experiment = ExperimentStore.get();
-      experiment.stats_questions = experiment.stats_questions || [];
-      experiment.stats_questions.push({
-        questions: q,
-        stats: StoryStatsStore.generateBlockStats(blockNum)
-      });
-      ExperimentActions.update(worker._id, 'writing_task', experiment);
       ViewActions.setView(VIEW_NAMES.IMAGE_VIEW);
     } else {
       this.props.exit();

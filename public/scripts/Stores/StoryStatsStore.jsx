@@ -11,21 +11,29 @@ var example_stats = {
  * Cache of stories written by the worker.
  * @private
  */
-StoryStatsStore._worker_stats_cache = [];
+StoryStatsStore._stats = [];
 
 /**
  * Action Listener for StoryStatsStore
  */
 StoryStatsStore.d_index = StoryStatsStore.dispatcher.register(function (action) {
+  'use strict';
   switch(action.actionType) {
-    case STORY_ACTIONS.UPDATE:
+    case STORY_STATS_ACTIONS.LOAD_BLOCK_STATS:
+      this._stats = action.stats;
       this.emitChange();
       break;
   }
 }.bind(StoryStatsStore));
 
 
+StoryStatsStore.get = function () {
+  'use strict';
+  return this._stats;
+};
+
 StoryStatsStore.generateWorkerStats = function (iid) {
+  'use strict';
   var story = StoryStore.get(iid);
   var stats = {
     story_length: story.text.length,
@@ -39,51 +47,3 @@ StoryStatsStore.generateWorkerStats = function (iid) {
   });
   return stats;
 };
-
-
-StoryStatsStore.generateBlockStats = function (block_num) {
-  'use strict';
-  var block_size = CONFIG.block_size;
-  var iid;
-
-  var workers_last_stats= [];
-  for (var i=0; i< block_size; i++) {
-    iid = (block_num * block_size) + i;
-    workers_last_stats.push(writingstats.generateBlockStats(StoryStore.get(iid)));
-  }
-
-  var workers_average_stats= [];
-  for (i=0; i < (block_num * block_size); i++) {
-    workers_average_stats.push(writingstats.generateBlockStats(StoryStore.get(i)));
-  }
-
- return {
-    workers_last: stats.aggregateStats(workers_last_stats),
-    //workers_average: stats.aggregateStats(workers_average_stats),
-    population_average: this._population_stats.population_average,
-    population_elite: this._population_stats.population_elite
-  };
-};
-
-
-StoryStatsStore.all = function () {
-  'use strict';
-  return this._worker_stats_cache;
-};
-
-
-$.ajax({
-  type: 'GET',
-  url: '/writing_task/stats',
-  dataType: 'json',
-  success: function (data) {
-    StoryStatsStore._population_stats = data;
-  },
-  error: function (a, b, c) {
-    console.log(a, b, c);
-  }
-});
-
-
-
-

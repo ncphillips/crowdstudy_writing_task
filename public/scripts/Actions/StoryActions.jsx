@@ -27,3 +27,33 @@ var StoryActions = {
     CrowdDispatcher.dispatch(action);
   }
 };
+
+
+var StoryStatsActions = (function() {
+  function setStats(data) {
+    var action = {
+      actionType: STORY_STATS_ACTIONS.LOAD_BLOCK_STATS,
+      stats: data
+    };
+
+    CrowdDispatcher.dispatch(action);
+  }
+
+  return {
+    load_block_stats: function (wid, block_num, block_size) {
+      if (typeof block_size === 'undefined') {
+        block_size = CONFIG.block_size;
+      }
+
+      $.ajax({
+        type: 'GET',
+        url: '/writing_task/' + wid + '/stats?block_num=' + block_num + '&block_size=' + block_size,
+        dataType: 'json',
+        success: setStats,
+        error: function (a, b, c) {
+          console.log(a, b, c);
+        }
+      });
+    }
+  };
+})();
