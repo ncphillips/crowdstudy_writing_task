@@ -99,7 +99,6 @@ var writingstats = (function () {
       words: 0
     };
 
-
     block.text.split(' ').forEach(function (word, i) {
       if (word) {
         console.log(i, word);
